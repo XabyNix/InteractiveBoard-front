@@ -1,0 +1,10 @@
+<div class="container">
+  <canvas class="whiteboardArea" #canvasRef
+          (mousedown)="startDrawing($event)"
+          (mousemove)="draw($event)"
+          (mouseup)="stopDrawing()"
+          (mouseleave)="stopDrawing()">
+  </canvas>
+
+  <button type="button" (click)="clearWhiteboard()">Clear</button>
+</div>
