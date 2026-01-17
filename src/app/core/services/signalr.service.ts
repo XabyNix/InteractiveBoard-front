@@ -4,6 +4,7 @@ import {Stroke} from '../../shared/models/stroke.model';
 import {Subject} from 'rxjs';
 import {Injectable} from '@angular/core';
 import {Point} from '../../shared/models/point.model';
+import {environment} from '../../../environments/environment';
 
 @Injectable({providedIn: 'root'})
 export class SignalRService{
@@ -16,7 +17,7 @@ export class SignalRService{
 
   constructor() {
     this.hubConnection = new signalR.HubConnectionBuilder()
-      .withUrl("http://localhost:5281/hub/stroke")
+      .withUrl(`${environment.apiUrl}/hub/stroke`)
       .withAutomaticReconnect()
       .configureLogging(LogLevel.Debug)
       .build();
