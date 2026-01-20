@@ -2,4 +2,5 @@
   border: 1px solid #ccc;
   background-color: white;
   cursor: crosshair;
+  touch-action: none;
 }
