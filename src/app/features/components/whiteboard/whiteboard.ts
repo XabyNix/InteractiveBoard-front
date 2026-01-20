@@ -50,6 +50,14 @@ export class Whiteboard implements AfterViewInit {
 
   }
 
+  private getCoordinates(event: PointerEvent){
+    const rect = this.canvasRef.nativeElement.getBoundingClientRect();
+    return {
+      x: event.clientX - rect.left,
+      y: event.clientY - rect.top
+    }
+  }
+
   beginPath(offsetX: number, offsetY: number){
     this.ctx.beginPath();
     this.ctx.moveTo(offsetX, offsetY);
@@ -60,17 +68,24 @@ export class Whiteboard implements AfterViewInit {
     this.ctx.stroke();
   }
 
-  startDrawing(event: MouseEvent) {
+  startDrawing(event: PointerEvent) {
     this.isDrawing = true;
-    this.beginPath(event.offsetX, event.offsetY);
+    const coords = this.getCoordinates(event);
+    this.beginPath(coords.x, coords.y);
 
     this.signalrService.sendPoint({x: event.offsetX, y: event.offsetY, isNewLine: true})
   }
 
-  draw(event: MouseEvent) {
+  draw(event: PointerEvent) {
     if (!this.isDrawing) return;
 
-    this.signalrService.sendPoint({x: event.offsetX, y: event.offsetY, isNewLine: false})
+    const coords = this.getCoordinates(event);
+
+    this.signalrService.sendPoint({
+      x: coords.x,
+      y: coords.y,
+      isNewLine: false
+    })
     this.linePath(event.offsetX, event.offsetY);
   }
 
