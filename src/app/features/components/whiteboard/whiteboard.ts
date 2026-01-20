@@ -73,7 +73,7 @@ export class Whiteboard implements AfterViewInit {
     const coords = this.getCoordinates(event);
     this.beginPath(coords.x, coords.y);
 
-    this.signalrService.sendPoint({x: event.offsetX, y: event.offsetY, isNewLine: true})
+    this.signalrService.sendPoint({x: coords.x, y: coords.y, isNewLine: true})
   }
 
   draw(event: PointerEvent) {
@@ -86,7 +86,7 @@ export class Whiteboard implements AfterViewInit {
       y: coords.y,
       isNewLine: false
     })
-    this.linePath(event.offsetX, event.offsetY);
+    this.linePath(coords.x, coords.y);
   }
 
   stopDrawing() {
