@@ -1,3 +1,12 @@
+<div>
+  <app-toolbar>
+    <whiteboard-colorPicker
+      [(color)]="currentColor"
+      (colorChange)="onColorChange($event)"
+    ></whiteboard-colorPicker>
+  </app-toolbar>
+</div>
+
 <div class="container">
   <canvas class="whiteboardArea" #canvasRef
           (pointerdown)="startDrawing($event)"
