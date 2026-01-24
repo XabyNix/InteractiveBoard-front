@@ -10,7 +10,7 @@ export interface CanvasConfig {
 
 export const DEFAULT_CANVAS_CONFIG: Required<CanvasConfig> = {
   strokeStyle: '#8d0000',
-  lineWidth: 2,
+  lineWidth: 12,
   lineCap: 'round',
   widthRatio: 0.95,
   height: 600
@@ -66,13 +66,12 @@ export class CanvasDrawingService {
     this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
   }
 
-
   setLineWidth (width: number) : void {
     this.ctx.lineWidth = width;
   }
 
   setStrokeColor(color: string){
-    this.config.strokeStyle = color;
+    this.ctx.strokeStyle = color;
   }
 
   getCanvasDimension() : {width: number, height: number} {

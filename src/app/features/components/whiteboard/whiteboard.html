@@ -1,9 +1,7 @@
 <div>
   <app-toolbar>
-    <whiteboard-colorPicker
-      [(color)]="currentColor"
-      (colorChange)="onColorChange($event)"
-    ></whiteboard-colorPicker>
+    <app-size-selector></app-size-selector>
+    <whiteboard-colorPicker></whiteboard-colorPicker>
   </app-toolbar>
 </div>
 

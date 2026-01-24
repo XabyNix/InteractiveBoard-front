@@ -1,0 +1,12 @@
+.toolbar-section{
+  display: flex;
+  justify-content: center;
+}
+
+.toolbar-container{
+  display: flex;
+  border: 1px solid black;
+  padding: 1rem;
+  column-gap: 0.5rem;
+  border-radius: 7px;
+}

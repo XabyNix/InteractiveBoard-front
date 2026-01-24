@@ -12,6 +12,7 @@ export class SignalRService{
   private hubConnection: signalR.HubConnection;
   private strokeReceived$ = new Subject<Stroke>;
   public pointReceived$ = new Subject<Point>();
+  public pointsReceived$ = new Subject<Point[]>();
   public clearReceived$ = new Subject<void>();
 
 
@@ -25,6 +26,7 @@ export class SignalRService{
     this.StartConnection();
     this.registerEvents();
     this.receivePoint();
+    this.receivePoints();
     this.receiveClear();
 
   }
@@ -48,6 +50,12 @@ export class SignalRService{
     })
   }
 
+  private receivePoints(){
+    this.hubConnection.on("ReceivePointList", (point: Point[])=> {
+      this.pointsReceived$.next(point);
+    })
+  }
+
   private receiveClear(){
     this.hubConnection.on("Clear", ()=> {
       this.clearReceived$.next();
@@ -62,6 +70,12 @@ export class SignalRService{
   public sendPoint(point: Point){
     this.hubConnection.invoke("SendPoint", point)
       .catch(err => console.error("SignalR send point error", err.toString()));
+  }
+
+  public sendPoints(points: Point[]){
+    this.hubConnection.invoke("SendPointList", points)
+      .then(() => console.log("sendEvent"))
+      .catch(err => console.error("SignalR send points error", err.toString()));
   }
 
   public sendClear(){
