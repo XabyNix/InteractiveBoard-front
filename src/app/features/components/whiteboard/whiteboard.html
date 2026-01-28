@@ -1,21 +1,8 @@
-<div class="whiteboard-container">
-  <app-toolbar>
-    <app-toolbar-item label="Size">
-      <app-size-selector></app-size-selector>
-    </app-toolbar-item>
-    <app-toolbar-item label="Color">
-      <whiteboard-colorPicker></whiteboard-colorPicker>
-    </app-toolbar-item>
-  </app-toolbar>
+<canvas id="whiteboardArea" #canvasRef
+        (pointerdown)="startDrawing($event)"
+        (pointermove)="draw($event)"
+        (pointerup)="stopDrawing()"
+        (pointerleave)="stopDrawing()">
+</canvas>
+<!--<button type="button" (click)="clearWhiteboard()">Clear</button>-->
 
-
-
-  <canvas class="whiteboardArea" #canvasRef
-          (pointerdown)="startDrawing($event)"
-          (pointermove)="draw($event)"
-          (pointerup)="stopDrawing()"
-          (pointerleave)="stopDrawing()">
-  </canvas>
-
-  <button type="button" (click)="clearWhiteboard()">Clear</button>
-</div>

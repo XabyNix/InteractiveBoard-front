@@ -3,20 +3,10 @@ import {SignalRService} from '../../../core/services/signalr.service';
 import {Point} from '../../../shared/models/point.model';
 import {CanvasDrawingService} from '../../../core/services/canvas-drawing.service';
 import {Subject, takeUntil} from 'rxjs';
-import {Toolbar} from '../toolbar/toolbar';
-import {WhiteboardColorPicker} from '../toolbar/whiteboard-colorpicker/whiteboard-colorPicker';
-import {SizeSelector} from '../toolbar/size-selector/size-selector';
-import {HttpClient} from '@angular/common/http';
-import {ToolbarItem} from '../toolbar-item/toolbar-item';
 
 @Component({
   selector: 'app-whiteboard',
-  imports: [
-    Toolbar,
-    WhiteboardColorPicker,
-    SizeSelector,
-    ToolbarItem
-  ],
+  imports: [ ],
   standalone: true,
   templateUrl: './whiteboard.html',
   styleUrl: './whiteboard.css',
@@ -27,7 +17,6 @@ export class Whiteboard implements AfterViewInit, OnDestroy {
 
   private readonly signalrService = inject(SignalRService);
   private readonly drawingService = inject(CanvasDrawingService);
-  private readonly http = inject(HttpClient);
 
   private isDrawing = false;
   private pointBuffer: Point[] = [];

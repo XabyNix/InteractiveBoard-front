@@ -4,16 +4,12 @@ export interface CanvasConfig {
   strokeStyle?: string;
   lineWidth?: number;
   lineCap?: CanvasLineCap;
-  widthRatio?: number;
-  height?: number;
 }
 
 export const DEFAULT_CANVAS_CONFIG: Required<CanvasConfig> = {
   strokeStyle: '#8d0000',
   lineWidth: 12,
-  lineCap: 'round',
-  widthRatio: 0.95,
-  height: 600
+  lineCap: 'round'
 }
 
 @Injectable({providedIn: 'root'})
@@ -35,8 +31,8 @@ export class CanvasDrawingService {
   }
 
   private setupCanvas(){
-    this.canvas.width = window.innerWidth * this.config.widthRatio;
-    this.canvas.height = this.config.height;
+    this.canvas.width = window.innerWidth;
+    this.canvas.height = window.innerHeight;
 
     this.ctx.strokeStyle = this.config.strokeStyle;
     this.ctx.lineWidth = this.config.lineWidth;
