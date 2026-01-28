@@ -4,10 +4,11 @@ import {ToolbarItem} from './features/components/toolbar-item/toolbar-item';
 import {SizeSelector} from './features/components/toolbar/size-selector/size-selector';
 import {WhiteboardColorPicker} from './features/components/toolbar/whiteboard-colorpicker/whiteboard-colorPicker';
 import {Toolbar} from './features/components/toolbar/toolbar';
+import {ClearButton} from './features/components/clear-button/clear-button';
 
 @Component({
   selector: 'app-root',
-  imports: [Whiteboard, ToolbarItem, SizeSelector, WhiteboardColorPicker, Toolbar],
+  imports: [Whiteboard, ToolbarItem, SizeSelector, WhiteboardColorPicker, Toolbar, ClearButton],
   templateUrl: './app.html',
   styleUrl: './app.css'
 })
