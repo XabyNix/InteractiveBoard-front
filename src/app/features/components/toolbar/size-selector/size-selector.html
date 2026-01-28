@@ -1,5 +1,5 @@
 <div class="size-picker">
-  <button type="button" (click)="decreaseSize()">-</button>
-  <input type="number" min="8" [(ngModel)]="brushSize" max="72">
-  <button type="button" (click)="increaseSize()">+</button>
+  <button class="left-button" type="button" (click)="decreaseSize()">-</button>
+  <input [(ngModel)]="brushSize">
+  <button class="right-button" type="button" (click)="increaseSize()">+</button>
 </div>

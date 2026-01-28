@@ -1,5 +1,37 @@
 .size-picker{
   display: flex;
+  --height: 36px;
+  --buttons-color: white;
+  --buttons-hover-color: lightgray;
 }
 
+.size-picker input{
+  width: var(--height);
+  border: none;
+  text-align: center;
+}
+
+.size-picker input:focus{
+  outline: none;
+}
+
+.size-picker button {
+  height: var(--height);
+  width: var(--height);
+  border: none;
+  background-color: var(--buttons-color);
+}
+
+.size-picker button:hover {
+  background-color: var(--buttons-hover-color);
+  cursor: pointer;
+}
+
+.size-picker .left-button{
+  border-radius: 15px 0 0 15px;
+}
+
+.size-picker .right-button{
+  border-radius: 0 15px 15px 0;
+}
 

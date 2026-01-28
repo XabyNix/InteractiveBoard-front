@@ -1,11 +1,15 @@
-<div>
+<div class="whiteboard-container">
   <app-toolbar>
-    <app-size-selector></app-size-selector>
-    <whiteboard-colorPicker></whiteboard-colorPicker>
+    <app-toolbar-item label="Size">
+      <app-size-selector></app-size-selector>
+    </app-toolbar-item>
+    <app-toolbar-item label="Color">
+      <whiteboard-colorPicker></whiteboard-colorPicker>
+    </app-toolbar-item>
   </app-toolbar>
-</div>
 
-<div class="container">
+
+
   <canvas class="whiteboardArea" #canvasRef
           (pointerdown)="startDrawing($event)"
           (pointermove)="draw($event)"

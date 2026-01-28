@@ -1,13 +1,16 @@
 import * as signalR from "@microsoft/signalr";
 import {LogLevel} from "@microsoft/signalr";
 import {Stroke} from '../../shared/models/stroke.model';
-import {Subject} from 'rxjs';
-import {Injectable} from '@angular/core';
+import {lastValueFrom, Subject} from 'rxjs';
+import {inject, Injectable} from '@angular/core';
 import {Point} from '../../shared/models/point.model';
 import {environment} from '../../../environments/environment';
+import {AuthService} from './auth.service';
 
 @Injectable({providedIn: 'root'})
 export class SignalRService{
+
+  private readonly authService = inject(AuthService);
 
   private hubConnection: signalR.HubConnection;
   private strokeReceived$ = new Subject<Stroke>;
@@ -18,7 +21,9 @@ export class SignalRService{
 
   constructor() {
     this.hubConnection = new signalR.HubConnectionBuilder()
-      .withUrl(`${environment.apiUrl}/hub/stroke`)
+      .withUrl(`${environment.apiUrl}/hub/stroke`, {
+        accessTokenFactory: () => lastValueFrom(this.authService.getAccessToken())
+      })
       .withAutomaticReconnect()
       .configureLogging(LogLevel.Debug)
       .build();

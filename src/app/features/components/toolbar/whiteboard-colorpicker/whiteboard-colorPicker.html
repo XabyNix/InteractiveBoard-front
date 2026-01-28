@@ -1,6 +1,8 @@
-<div
-  class="color-picker-selector"
-  [(colorPicker)]="currentColor"
-  (colorPickerChange)="onColorChange($event)"
-  [style.background-color]="currentColor"
-></div>
+<div class="color-picker-container">
+  <div
+    class="color-picker-selector"
+    [(colorPicker)]="currentColor"
+    (colorPickerChange)="onColorChange($event)"
+    [style.background-color]="currentColor"
+  ></div>
+</div>

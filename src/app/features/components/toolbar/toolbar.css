@@ -1,12 +1,15 @@
 .toolbar-section{
-  display: flex;
-  justify-content: center;
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
 }
 
 .toolbar-container{
   display: flex;
-  border: 1px solid black;
-  padding: 1rem;
+  background-color: rgba(178, 183, 188, 0.24);
+  padding: 1rem 3rem;
   column-gap: 0.5rem;
-  border-radius: 7px;
+  border-radius: 80px;
 }
+
