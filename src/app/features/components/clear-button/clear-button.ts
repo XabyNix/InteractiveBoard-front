@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import {CanvasDrawingService} from '../../../core/services/canvas-drawing.service';
+import {SignalRService} from '../../../core/services/signalr.service';
 
 @Component({
   selector: 'app-clear-button',
@@ -9,12 +10,13 @@ import {CanvasDrawingService} from '../../../core/services/canvas-drawing.servic
 })
 export class ClearButton {
 
-  constructor(private drawingService: CanvasDrawingService){
+  constructor(private drawingService: CanvasDrawingService, private signalrService: SignalRService){
 
   }
 
   clearWhiteboard (){
     this.drawingService.clear();
+    this.signalrService.sendClear();
   }
 
 }

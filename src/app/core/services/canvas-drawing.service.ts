@@ -65,7 +65,6 @@ export class CanvasDrawingService {
 
   clear(): void {
     this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
-    this.signalrService.sendClear();
   }
 
   setLineWidth (width: number) : void {
