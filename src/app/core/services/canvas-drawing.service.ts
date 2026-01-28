@@ -1,4 +1,5 @@
 import {Injectable} from '@angular/core';
+import {SignalRService} from './signalr.service';
 
 export interface CanvasConfig {
   strokeStyle?: string;
@@ -14,6 +15,10 @@ export const DEFAULT_CANVAS_CONFIG: Required<CanvasConfig> = {
 
 @Injectable({providedIn: 'root'})
 export class CanvasDrawingService {
+
+  constructor(private signalrService: SignalRService){
+
+  }
 
   private ctx!: CanvasRenderingContext2D;
   private canvas!: HTMLCanvasElement;
@@ -60,6 +65,7 @@ export class CanvasDrawingService {
 
   clear(): void {
     this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+    this.signalrService.sendClear();
   }
 
   setLineWidth (width: number) : void {
