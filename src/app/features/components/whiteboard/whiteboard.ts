@@ -93,9 +93,13 @@ export class Whiteboard implements AfterViewInit, OnDestroy {
 
   private getCoordinates(event: PointerEvent): Point{
     const rect = this.canvasRef.nativeElement.getBoundingClientRect();
+
+    const scaleX = this.canvasRef.nativeElement.width / rect.width;
+    const scaleY = this.canvasRef.nativeElement.height / rect.height;
+
     return {
-      x: event.clientX - rect.left,
-      y: event.clientY - rect.top,
+      x: (event.clientX - rect.left) * scaleX,
+      y: (event.clientY - rect.top) * scaleY,
       isNewLine: false,
     }
   }
