@@ -24,6 +24,9 @@ export class CanvasDrawingService {
   private canvas!: HTMLCanvasElement;
   private config: Required<CanvasConfig> = {...DEFAULT_CANVAS_CONFIG};
 
+  private lastX!: number;
+  private lastY!: number;
+
   initialize(canvas: HTMLCanvasElement, config?: CanvasConfig): void {
     this.canvas = canvas;
     this.ctx = canvas.getContext('2d')!;
@@ -36,32 +39,40 @@ export class CanvasDrawingService {
   }
 
   private setupCanvas(){
-    this.canvas.width = window.innerWidth;
-    this.canvas.height = window.innerHeight;
+    const dpr = window.devicePixelRatio || 1;
+
+    this.canvas.width = window.innerWidth * dpr;
+    this.canvas.height = window.innerHeight * dpr;
 
     this.ctx.strokeStyle = this.config.strokeStyle;
     this.ctx.lineWidth = this.config.lineWidth;
     this.ctx.lineCap = this.config.lineCap;
-  }
-
-  getConfig(){
-    return {...this.config}
-  }
-
-  getStrokeColor(){
-    return this.config.strokeStyle
+    this.ctx.lineJoin = 'round';
+    this.ctx.lineCap = 'round';
   }
 
   beginPath(x: number, y: number): void {
     this.ctx.beginPath();
     this.ctx.moveTo(x, y);
+
+    this.lastX = x;
+    this.lastY = y;
   }
 
   linePath(x: number, y: number): void {
-    this.ctx.lineTo(x, y);
-    this.ctx.stroke();
+
+    const mixX = (this.lastX + x) / 2;
+    const mixY = (this.lastY + y) / 2;
+
+    this.ctx.quadraticCurveTo(this.lastX, this.lastY, mixX, mixY);
+
+    this.lastX = x;
+    this.lastY = y;
   }
 
+  endStroke(){
+    this.ctx.stroke();
+  }
 
   clear(): void {
     this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
@@ -73,13 +84,6 @@ export class CanvasDrawingService {
 
   setStrokeColor(color: string){
     this.ctx.strokeStyle = color;
-  }
-
-  getCanvasDimension() : {width: number, height: number} {
-    return {
-      width: this.canvas.width,
-      height: this.canvas.height
-    }
   }
 
 }

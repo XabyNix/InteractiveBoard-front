@@ -57,11 +57,7 @@ export class Whiteboard implements AfterViewInit, OnDestroy {
 
   stopDrawing() {
     this.isDrawing = false;
-  }
-
-  clearWhiteboard(){
-    this.drawingService.clear()
-    this.signalrService.sendClear();
+    this.drawingService.endStroke();
   }
 
   private initializeCanvas(): void {
