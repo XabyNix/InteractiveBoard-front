@@ -52,12 +52,17 @@ export class Whiteboard implements AfterViewInit, OnDestroy {
     const coords = this.getCoordinates(event);
 
     this.drawingService.linePath(coords.x, coords.y);
-    this.pointBuffer.push({x: coords.x, y: coords.y, isNewLine: false})
+    //this.pointBuffer.push({x: coords.x, y: coords.y, isNewLine: false})
   }
 
   stopDrawing() {
     this.isDrawing = false;
     this.drawingService.endStroke();
+    for (const point of this.pointBuffer){
+
+      this.signalrService.sendPoint({x: point.x, y: point.y, isNewLine: true})
+    }
+
   }
 
   private initializeCanvas(): void {
