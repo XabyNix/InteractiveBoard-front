@@ -64,7 +64,7 @@ export class CanvasDrawingService {
     const mixX = (this.lastX + x) / 2;
     const mixY = (this.lastY + y) / 2;
 
-    this.ctx.quadraticCurveTo(this.lastX, this.lastY, mixX, mixY);
+    this.ctx.lineTo(mixX, mixY);
 
     this.lastX = x;
     this.lastY = y;
