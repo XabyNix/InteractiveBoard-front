@@ -57,7 +57,7 @@ export class Whiteboard implements AfterViewInit, OnDestroy {
 
   stopDrawing() {
     this.isDrawing = false;
-    this.drawingService.endStroke();
+    this.drawingService.stroke();
     for (const point of this.pointBuffer){
       this.signalrService.sendPoint({x: point.x, y: point.y, isNewLine: false})
     }
@@ -83,10 +83,12 @@ export class Whiteboard implements AfterViewInit, OnDestroy {
   }
 
   private handleRemotePoints(points: Point[]): void {
+    this.drawingService.beginPath(points[0].x, points[0].y);
     for (const point of points) {
-        this.drawingService.beginPath(point.x, point.y)
         this.drawingService.linePath(point.x, point.y);
     }
+
+    this.drawingService.stroke()
   }
 
   private getCoordinates(event: PointerEvent): Point{

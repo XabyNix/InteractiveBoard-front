@@ -70,7 +70,7 @@ export class CanvasDrawingService {
     this.lastY = y;
   }
 
-  endStroke(){
+  stroke(){
     this.ctx.stroke();
   }
 
